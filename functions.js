@@ -372,7 +372,7 @@ try {
       let me = JSON.parse(localStorage.getItem("loggedinuser"));
       // handle result
       console.log(result);
-      
+
       // Write a condition
       if (result.rows.length < 1) {
         let info = document.createElement("h3");
@@ -597,14 +597,16 @@ function LoadCurrentChats() {
               template += `
  <div data-key="${index}" data-conversation="${messageid}" class="speech-bubble speech-left bg-highlight"  onclick="removeChat(this)">
  <img src="${item.attachment}" width="150px" />
-                   ${item.message}
+                   ${item.message}  <br>
+<span style="font-size10px;">${item.time_added.slice(0, -3)}</span>
                 </div>
                 <div class="clearfix"></div>
             `;
             } else {
               template += `
  <div  data-key="${index}" data-conversation="${messageid}"  class="speech-bubble speech-left bg-highlight"  onclick="removeChat(this)">
-                   ${item.message}
+                   ${item.message} <br>
+   <span style="font-size10px;">${item.time_added.slice(0, -3)}</span>
                 </div>
                 <div class="clearfix"></div>
             `;
@@ -616,6 +618,8 @@ function LoadCurrentChats() {
                 
                   <img  src="${item.attachment}" width="150px" />
                             ${item.message}
+                            <br>
+    <span style="font-size10px;">${item.time_added.slice(0, -3)}</span>
                             </div>
                             <div class="clearfix"></div>
                         `;
@@ -623,6 +627,7 @@ function LoadCurrentChats() {
               template += `
                <div data-key="${index}" data-conversation="${messageid}"  class="speech-bubble speech-right color-black" onclick="removeChat(this)">
                    ${item.message}
+         <span style="font-size10px;">${item.time_added.slice(0, -3)}</span>
                 </div>
                 <div class="clearfix"></div>
         
@@ -954,6 +959,7 @@ try {
                 Messagesdb.put(newmessage).then(function (doc) {
                   document.getElementById("themessage").value = "";
                   //doc output here
+                  LoadCurrentChats();
                 });
               })
               .then(function (response) {
@@ -971,6 +977,7 @@ try {
                   //doc output here
                   window.scrollTo(0, document.body.scrollHeight);
                   document.getElementById("themessage").value = "";
+                  LoadCurrentChats();
                 });
               });
           })
@@ -1007,6 +1014,7 @@ const removeChat = (e) => {
           allmessages._id = doc._id;
           allmessages._rev = doc._rev;
           Messagesdb.put(allmessages);
+          LoadCurrentChats();
         },
         () => {},
         {}
@@ -1024,3 +1032,142 @@ const removeChat = (e) => {
       console.log(err);
     });
 };
+
+/* --------------------------------- SEND OTP FOR PASSWORD RESET -------------------------------- */
+try {
+  document.getElementById("sendotpnow").addEventListener("click", function () {
+    Notiflix.Loading.standard("Please wait loading....");
+    let emailaddress = document.getElementById("emailaddress").value;
+    const otp = Math.floor(Math.random() * 90000) + 10000;
+    sessionStorage.setItem(
+      "otpsession",
+      JSON.stringify({ email: emailaddress, otp: otp })
+    );
+    sessionStorage.setItem(
+      "otpsession",
+      JSON.stringify({ email: emailaddress, otp: otp })
+    );
+    Email.send({
+      Host: "smtp.elasticemail.com",
+      Username: "noreply@getknacks.com",
+      Password: "EF0CA83A2FB9BCA3BE9758693D5E807AFA2A",
+      To: emailaddress,
+      From: "info@getknacks.com",
+      Subject: "OTP VERIFICATION",
+      Body: `Your Otp verification code is ${otp}`,
+    })
+      .then((message) => {
+        Notiflix.Loading.remove();
+        Notiflix.Confirm.show(
+          "OTP SENT",
+          "OTP  SENT SUCCESSFULLY PLEASE CHECK INBOX OR SPAM. SOME EMAIL PROVIDERS HAVE ISSUES WITH SMTP",
+          "Okay",
+          "Cancel",
+          () => {
+            location.assign("otp.html");
+          },
+          () => {
+            //nothing
+          },
+          {}
+        );
+      })
+      .catch((err) => {
+        Notiflix.Loading.remove();
+        Notiflix.Report.failure(
+          "Notification",
+          "Could not send OTP an error occured."
+        );
+      });
+  });
+} catch (error) {}
+
+try {
+  document.getElementById("verifyotp").addEventListener("click", function () {
+    Notiflix.Loading.standard("Please wait Loading...");
+    let history = sessionStorage.getItem("otpsession");
+    //history
+    history = JSON.parse(history);
+    let allotp = document.getElementsByClassName("otp");
+    //providedotp
+    let providedotp = "";
+    for (x = 0; x < allotp.length; x++) {
+      providedotp += allotp[x].value;
+    }
+
+    console.log(providedotp);
+    if (providedotp == history.otp) {
+      Notiflix.Confirm.show(
+        "OTP CONFIRMED",
+        "OTP HAS BEEN CONFIRMED CORRECT,CLICK OKAY TO RESET PASSWORD",
+        "Okay",
+        "Cancel",
+        () => {
+          location.assign("reset.html");
+        },
+        () => {
+          //nothing
+        },
+        {}
+      );
+    } else {
+      Notiflix.Loading.remove();
+      Notiflix.Report.failure(
+        "Notification",
+        "Could not verify otp, Wrong otp provided..."
+      );
+    }
+  });
+} catch (error) {}
+
+try {
+  document
+    .getElementById("createnewpassword")
+    .addEventListener("click", function () {
+      //history
+      let history = sessionStorage.getItem("otpsession");
+      //history
+      history = JSON.parse(history);
+      //new details
+      var password = document.getElementById("password").value;
+      var newpassword = document.getElementById("newpassword").value;
+
+      if (password == newpassword) {
+        Usersdb.get(history.email)
+          .then(function (doc) {
+            doc.password = password.trim();
+            doc._id = doc._id;
+            doc._rev = doc._rev;
+            return Usersdb.put(doc);
+          })
+          .then(function (response) {
+            // handle response
+            Notiflix.Loading.remove();
+            Notiflix.Confirm.show(
+              "PASSWORD CHANGED",
+              "Password has been changed successfully.....",
+              "Okay",
+              "Cancel",
+              () => {
+                location.assign("login.html");
+              },
+              () => {
+                //nothing
+              },
+              {}
+            );
+          })
+          .catch(function (err) {
+            Notiflix.Loading.remove();
+            Notiflix.Report.failure("Notification", "An erroroccured" + err);
+            console.log(err);
+          });
+      } else {
+        Notiflix.Loading.remove();
+        Notiflix.Report.failure(
+          "Notification",
+          "Passwords provided do not match"
+        );
+      }
+    });
+} catch (error) {}

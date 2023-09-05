@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
-    <title>AppKit Mobile</title>
+    <title>OTP Mobile</title>
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
 
     <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
@@ -33,22 +33,32 @@
             <div class="card card-style">
                 <div class="content">
                     <p class="font-600 color-highlight mb-n1">Reset Account</p>
-                    <h1 class="font-30">Forgot</h1>
+                    <h1 class="font-30">Reset Password</h1>
                     <p>
                         Enter your email addresse below and we'll send you the reset instructions.
                     </p>
+
                     <div class="input-style no-borders has-icon validate-field mb-4">
-                        <i class="fa fa-at"></i>
-                        <input type="email" class="form-control validate-name" id="emailaddress" placeholder="Email"
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" class="form-control validate-name" id="password" placeholder="Password"
                             autoComplete="cc-csc">
-                        <label for="form1a" class="color-highlight font-11 font-500">Email</label>
+                        <label for="form1a" class="color-highlight font-11 font-500">Password</label>
                         <i class="fa fa-times disabled invalid color-red-dark"></i>
                         <i class="fa fa-check disabled valid color-green-dark"></i>
                         <em>(required)</em>
                     </div>
-                    <a style="cursor:pointer;" id="sendotpnow"
-                        class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Send Reset
-                        Instructions</a>
+                    <div class="input-style no-borders has-icon validate-field mb-4">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" class="form-control validate-name" id="newpassword"
+                            placeholder="New Password" autoComplete="cc-csc">
+                        <label for="form1a" class="color-highlight font-11 font-500">New Password</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <a style="cursor:pointer;" id="createnewpassword"
+                        class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">UPDATE
+                        PASSWORD</a>
                     <div class="row pt-3 mb-0">
                         <div class="col-6 text-start">
                             <a href="login.html" class="color-highlight">Sign In</a>

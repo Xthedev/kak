@@ -14,9 +14,15 @@
 
     <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
     <script src="scripts/pouchdb.js"></script>
+
+    <script src="realtimedb.js"></script>
+    <!-- ADD NOTIFLIX TO APP  -->
+    <link rel="stylesheet" type="text/css" href="src/notiflix.css" />
+    <script src="src/notiflix.js"></script>
+    <script src="src/smtp.js"></script>
 </head>
 
-<body  class="theme-dark">
+<body class="theme-dark">
     <div id="preloader">
         <div class="spinner-border color-highlight" role="status"></div>
     </div>
@@ -40,7 +46,7 @@
                         </form>
                     </div>
                     <p class="text-center my-4 font-11">Didn't get your code? <a href="#">Resend Code</a></p>
-                    <a href="#" data-back-button=""
+                    <a href="#" id="verifyotp"
                         class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s border-0">Verify
                         Account</a>
                 </div>
@@ -51,6 +57,7 @@
     </div>
     <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script src="functions.js"> </script>
 </body>
 
 </html>
