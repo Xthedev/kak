@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+    <title>knacks</title>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+    <script src="scripts/pouchdb.js"></script>
+    <script src="realtimedb.js"></script>
+
+    <!-- ADD NOTIFLIX TO APP  -->
+    <link rel="stylesheet" type="text/css" href="src/notiflix.css" />
+    <script src="src/notiflix.js"></script>
+
+</head>
+
+<body  class="theme-dark">
+    <div id="preloader">
+        <div class="spinner-border color-highlight" role="status"></div>
+    </div>
+    <div id="page">
+
+
+        <div class="page-content header-clear-medium">
+            <div class="card card-style">
+                <div class="content">
+                    <p class="font-600 color-highlight mb-n1">Free Accounts</p>
+                    <h1 class="font-30">Sign Up</h1>
+                    <p>
+                        Create an account, it's free and gives you tones of benefits!
+                    </p>
+                    <div class="input-style no-borders has-icon validate-field mb-4">
+                        <i class="fa fa-user"></i>
+                        <input type="name" class="form-control validate-name" id="fullname" placeholder="Full Name"
+                            autoComplete="cc-csc">
+                        <label for="form1ab" class="color-highlight">Full Name</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <div class="input-style no-borders has-icon validate-field mb-4">
+                        <i class="fa fa-at"></i>
+                        <input type="email" class="form-control validate-email" id="email" placeholder="Email Address"
+                            autoComplete="cc-csc">
+                        <label for="form1ac" class="color-highlight">Email Address</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <div class="input-style no-borders has-icon validate-field mb-4">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" class="form-control validate-password" id="password"
+                            autoComplete="cc-csc" placeholder="Choose Password">
+                        <label for="form1ad" class="color-highlight">Choose Password</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <div class="input-style no-borders has-icon validate-field mb-4">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" class="form-control validate-password" id="confirmpassword"
+                            autoComplete="cc-csc" placeholder="Confirm Password">
+                        <label for="form1ae" class="color-highlight">Confirm Password</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <a style="cursor:pointer;" id="registeruser"
+                        class="btn btn-full btn-l font-600 font-13 gradient-highlight mt-4 rounded-s">Create Account</a>
+                    <div class="row pt-3 mb-3">
+                        <div class="col-6 text-start">
+                            <a href="forgot.html">Forgot Password?</a>
+                        </div>
+                        <div class="col-6 text-end">
+                            <a href="login.html">Sign In Here</a>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+    <script src="functions.js"> </script>
+</body>
+
+</html>

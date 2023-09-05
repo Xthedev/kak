@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <title>Knacks</title>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/css/fontawesome-all.min.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">
+    <script src="scripts/pouchdb.js"></script>
+    <script src="realtimedb.js"></script>
+    <!-- ADD NOTIFLIX TO APP  -->
+    <link rel="stylesheet" type="text/css" href="src/notiflix.css" />
+    <script src="src/notiflix.js"></script>
+    <script> var page = "editprofile";</script>
+    <style>
+        .visuallyhidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+    </style>
+</head>
+
+<body class="theme-dark">
+    <div id="preloader">
+        <div class="spinner-border color-highlight" role="status"></div>
+    </div>
+    <div id="page">
+
+        <!-- ------------------------------------------------------------------------------------------- -->
+        <!--                                      BOTTOM NAVIGATION                                      -->
+        <!-- ------------------------------------------------------------------------------------------- -->
+        <div id="footer-bar" class="footer-bar-6">
+            <a href="dashboard.html"><i class="fa fa-home"></i><span>Home</span></a>
+            <a href="profile.html"><i class="fa fa-user-alt"></i><span>Profile</span></a>
+            <a href="chat.html" class="circle-nav"><i
+                    class="fas fa-comment-alt"></i><span>Chat</span><strong><u></u></strong></a> <a
+                href="editprofile.html" class="active-nav"><i class="fa fa-users-cog"></i><span>Settings</span></a>
+            <a href="#" onclick="(function(){
+ localStorage.clear();
+ location.assign('/login.html');
+})();return false;"><i class="fa fa-flag"></i><span>Logout</span></a>
+        </div>
+
+        <!-- ------------------------------------------------------------------------------------------- -->
+        <!--                                      BOTTOM NAVIGATION                                      -->
+        <!-- ------------------------------------------------------------------------------------------- -->
+
+
+        <div class="page-title page-title-fixed">
+
+
+        </div>
+        <div class="page-title-clear"></div>
+        <div class="page-content">
+
+
+            <!-- ------------------------------------------------------------------------------------------- -->
+            <!--                           TAKE ABOVE THIS SECTION FOR OTHER PAGES                           -->
+            <!-- ------------------------------------------------------------------------------------------- -->
+
+
+
+            <!-- -------------------------------- PAGE CONTENT STARTS HERE --------------------------------- -->
+            <div class="card card-style bg-7" id="profileimage" style="background-image: url(images/placeholder.png);"
+                data-card-height="450">
+                <div class="card-top">
+
+                    <a id="fileanchor" href="#"
+                        class="btn btn-l btn-primary border-white color-white float-end mt-2 me-2 rounded-sm file-upload"><i
+                            class="fa fa-camera pe-2"></i>Upload </a>
+                    <input type="file" name="file" id="file-input" class="visuallyhidden" />
+                </div>
+
+                <div class="card-bottom ms-3 me-3">
+                    <h1 class="font-40 line-height-xl color-white" id="usereditprofile"></h1>
+                    <p class="color-white opacity-60"><i class="fa fa-map-marker me-2"></i><span id="userloco">Update
+                            Country </span>
+                    </p>
+                    <p class="color-white opacity-80 font-15" id="bio">
+                        Bio lives here, please scroll down to update
+                    </p>
+                </div>
+                <div class="card-overlay bg-gradient"></div>
+            </div>
+            <div class="card card-style">
+                <div class="content">
+                    <p class="mb-n1 color-highlight font-600 font-12">Edit your Account</p><br />
+                    <h4>Basic Information</h4>
+                    <p>
+                        Please provide your basic information and update your profile.
+                    </p>
+                    <div class="mt-5 mb-3">
+                        <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <input type="text" class="form-control validate-name" id="firstname" placeholder="Jane"
+                                autoComplete="cc-csc">
+                            <label for="form1" class="color-highlight">First Name</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <input type="text" class="form-control validate-name" id="lastname" placeholder="Louder"
+                                autoComplete="cc-csc">
+                            <label for="form1" class="color-highlight">Other Names</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <input type="text" class="form-control validate-name" id="emailaddress"
+                                placeholder="name@domain.com" disabled>
+                            <label for="form1" class="color-highlight">Email Address</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <input type="text" class="form-control validate-name" id="country" placeholder="e.g Nigeria"
+                                autoComplete="cc-csc">
+                            <label for="form1" class="color-highlight">Country</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <input type="text" class="form-control validate-name" id="state" placeholder="e.g Lagos"
+                                autoComplete="cc-csc">
+                            <label for="form1" class="color-highlight">State</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        <div class="input-style has-borders no-icon input-style-always-active validate-field mb-4">
+                            <input type="text" class="form-control validate-name" id="city" placeholder="e.g Lekki"
+                                autoComplete="cc-csc">
+                            <label for="form1" class="color-highlight">City</label>
+                            <i class="fa fa-times disabled invalid color-red-dark"></i>
+                            <i class="fa fa-check disabled valid color-green-dark"></i>
+                            <em>(required)</em>
+                        </div>
+                        <div class="input-style has-borders no-icon input-style-always-active mb-4">
+                            <textarea id="biotwo"
+                                placeholder="Talk about yourself">Write something about yourself!</textarea>
+                            <label for="form7" class="color-highlight">About Me</label>
+                        </div>
+                    </div>
+                    <a href="#" id="savebio"
+                        class="btn btn-full btn-m gradient-highlight rounded-s font-13 font-600 mt-4">Save Basic
+                        Information</a>
+                </div>
+            </div>
+
+
+
+            <!-- ------------------------------------ PAGE REAL CONTENT ------------------------------------ -->
+        </div>
+
+        <!-- --------------------------------- page content ends here ---------------------------------- -->
+
+        <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-load="menu-main.html" data-menu-width="280"
+            data-menu-active="nav-pages"></div>
+
+        <div id="menu-share" class="menu menu-box-bottom rounded-m" data-menu-load="menu-share.html"
+            data-menu-height="370">
+        </div>
+
+        <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load="menu-colors.html"
+            data-menu-height="480">
+        </div>
+
+
+        <!-- ------------------------------------------------------------------------------------------- -->
+        <!--                           TAKE ABOVE THIS SECTION FOR OTHER PAGES                           -->
+        <!-- ------------------------------------------------------------------------------------------- -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- ------------------------------------------------------------------------------------------- -->
+    <!--                                   IGNORE BELOW THIS LINE                                    -->
+    <!-- ------------------------------------------------------------------------------------------- -->
+
+
+    </div>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/custom.js"></script>
+    <script src="functions.js"> </script>
+    <script src="auth.js"></script>
+</body>
