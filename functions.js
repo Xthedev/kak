@@ -1235,6 +1235,15 @@ function CheckNewMessages() {
                 }
               });
               //  SEND A NOTIFICATION
+
+              //SEND A NOTIFICATION TO REACTNATIVE
+              try {
+                window.ReactNativeWebView.postMessage(
+                  `New Message from: ${person.fullname}.  :${specificmessage[0].message} `
+                );
+              } catch (error) {}
+
+              //SEND A NOTIFICATION
             })
             .catch(function (e) {});
         }
