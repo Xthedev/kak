@@ -1188,6 +1188,7 @@ function Notifyme() {
     }
   } catch (w) {}
 }
+Notifyme();
 function CheckNewMessages() {
   let me = JSON.parse(localStorage.getItem("loggedinuser"));
   let idarray = [];
@@ -1214,7 +1215,7 @@ function CheckNewMessages() {
           // get the persons info
         } else {
           console.log("someone sent you a new message");
-          // GET THE PERSON AND SEND THE MESSAGE 
+          // GET THE PERSON AND SEND THE MESSAGE
           Usersdb.get(specificmessage[0].senderid)
             .then(function (response) {
               let person = response;
@@ -1247,3 +1248,7 @@ function CheckNewMessages() {
   } catch (error) {}
 }
 CheckNewMessages();
+
+setTimeout(function () {
+  Notifyme();
+}, 2000);
