@@ -626,7 +626,7 @@ function LoadCurrentChats() {
             } else {
               template += `
                <div data-key="${index}" data-conversation="${messageid}"  class="speech-bubble speech-right color-black" onclick="removeChat(this)">
-                   ${item.message}
+                   ${item.message}    <br>
          <span style="font-size10px;">${item.time_added.slice(0, -3)}</span>
                 </div>
                 <div class="clearfix"></div>
