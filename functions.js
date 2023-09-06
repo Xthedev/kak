@@ -1188,3 +1188,62 @@ function Notifyme() {
     }
   } catch (w) {}
 }
+function CheckNewMessages() {
+  let me = JSON.parse(localStorage.getItem("loggedinuser"));
+  let idarray = [];
+  me.friends.map((item) => {
+    idarray.push(concatenateEmails(me.email, item.friend));
+  });
+  console.log(idarray);
+
+  try {
+    Messagesdb.changes({
+      since: "now",
+      live: true,
+      include_docs: true,
+      doc_ids: idarray,
+    })
+      .on("change", function (change) {
+        // handle change
+        let notificationitem = change.doc;
+        specificmessage = notificationitem.messages.slice(-1);
+        console.log(specificmessage);
+        //check if it was me that sent message
+        if (specificmessage[0].senderid == me.email) {
+          console.log("its you that sent message so ignore");
+          // get the persons info
+        } else {
+          console.log("someone sent you a new message");
+          // GET THE PERSON AND SEND THE MESSAGE 
+          Usersdb.get(specificmessage[0].senderid)
+            .then(function (response) {
+              let person = response;
+              // SEND A NOTIFICATION
+              navigator.serviceWorker.register("sw.js");
+              Notification.requestPermission(function (result) {
+                if (result === "granted") {
+                  navigator.serviceWorker.ready.then(function (registration) {
+                    registration.showNotification(
+                      `New Message from: ${person.fullname}.`,
+                      {
+                        body: specificmessage[0].message,
+                        // data: { hello: "world" },
+                      }
+                    );
+                  });
+                }
+              });
+              //  SEND A NOTIFICATION
+            })
+            .catch(function (e) {});
+        }
+      })
+      .on("complete", function (info) {
+        // changes() was canceled
+      })
+      .on("error", function (err) {
+        console.log(err);
+      });
+  } catch (error) {}
+}
+CheckNewMessages();
