@@ -1171,3 +1171,20 @@ try {
       }
     });
 } catch (error) {}
+function Notifyme() {
+  try {
+    if (Notification.permission !== "granted") {
+    } else {
+      // request user grant to show notification
+      navigator.serviceWorker.register("sw.js");
+      Notification.requestPermission(function (result) {
+        if (result === "granted") {
+          navigator.serviceWorker.ready.then(function (registration) {
+            Notiflix.Notify.success("Notifications are Active");
+            // registration.showNotification("Notifications Are Active");
+          });
+        }
+      });
+    }
+  } catch (w) {}
+}
