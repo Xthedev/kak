@@ -1190,14 +1190,15 @@ function Notifyme() {
 }
 Notifyme();
 function CheckNewMessages() {
-  let me = JSON.parse(localStorage.getItem("loggedinuser"));
-  let idarray = [];
-  me.friends.map((item) => {
-    idarray.push(concatenateEmails(me.email, item.friend));
-  });
-  console.log(idarray);
-
+  
   try {
+    let me = JSON.parse(localStorage.getItem("loggedinuser"));
+    let idarray = [];
+    me.friends.map((item) => {
+      idarray.push(concatenateEmails(me.email, item.friend));
+    });
+    console.log(idarray);
+
     Messagesdb.changes({
       since: "now",
       live: true,
@@ -1239,7 +1240,10 @@ function CheckNewMessages() {
               //SEND A NOTIFICATION TO REACTNATIVE
               try {
                 window.ReactNativeWebView.postMessage(
-                  `New Message from: ${person.fullname}.  :${specificmessage[0].message} `
+                  JSON.stringify({
+                    title: `New Message from: ${person.fullname}.`,
+                    message: `New Message from: ${person.fullname}.`,
+                  })
                 );
               } catch (error) {}
 
@@ -1257,7 +1261,3 @@ function CheckNewMessages() {
   } catch (error) {}
 }
 CheckNewMessages();
-
-setTimeout(function () {
-  Notifyme();
-}, 2000);

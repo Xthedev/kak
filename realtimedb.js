@@ -6,7 +6,7 @@ const Notificationsdb = new PouchDB("notificationsdb");
 //syncfunction
 PouchDB.sync(
   Usersdb,
-  "https://admin:senseix1234!!A@backend.getknacks.com/social",
+  "https://knacks:knacks1234!!A@backend.getknacks.com/social",
   {
     live: true,
     retry: true,
